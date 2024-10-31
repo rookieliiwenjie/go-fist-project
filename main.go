@@ -1,32 +1,59 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-const N = 10
+// Used to check if numbers 1~n have been selected. true means selected, false otherwise
+var st []bool
 
-var st [N]bool // 用来判断1~n这n个数是否被选。true代表已经被选了，false反之
-var p [N]int   // 用来记录1~n个位置选的是哪个数
+// Used to record which number is selected for each position 1~n
+var p []int
 var n int
 
 func dfs(u int) {
-	fmt.Print("go dfs")
-	if u > n { // 当n个位置都确定之后就打印
+	fmt.Print("12323")
+	if u > n { // When all n positions are determined, print them
 		for i := 1; i <= n; i++ {
 			fmt.Print(p[i], " ")
 		}
 		fmt.Println()
 		return
 	}
-	for i := 1; i <= n; i++ { // 第u个位置开始选数
-		if !st[i] { // 如果这个数没有被选
-			st[i] = true  // 选择这个数打上标记
-			p[u] = i      // 记录
-			dfs(u + 1)    // 开始枚举下一个位置
-			st[i] = false // 恢复现场
+	for i := 1; i <= n; i++ { // Start selecting numbers for the u-th position
+		if !st[i] { // If this number has not been selected
+			st[i] = true  // Mark it as selected
+			p[u] = i      // Record it
+			dfs(u + 1)    // Start enumerating the next position
+			st[i] = false // Restore the state
 		}
 	}
 }
+func getSmallestString(s string) string {
+	sChars := []rune(s)
+	size := len(s)
+	if size <= 1 {
+		return s
+	}
+	for i := 1; i < size; i++ {
+		pre := sChars[i-1] - '0'
+		curr := sChars[i] - '0'
+		if (pre%2 == 0 && curr%2 == 0) || (pre%2 != 0 && curr%2 != 0) {
+			if pre > curr {
+				sChars[i-1], sChars[i] = sChars[i], sChars[i-1]
+				break
+			}
+		}
+	}
+	return string(sChars)
+
+}
 func main() {
-	fmt.Scan(&n)
-	dfs(1) // 从第一个位置开始遍历
+	// fmt.Scan(&n)
+	// st = make([]bool, n+1)
+	// p = make([]int, n+1)
+	// dfs(1) // Start traversing from the first position
+	s := "43520"
+	var reslu = getSmallestString(s)
+	fmt.Println(reslu)
 }
