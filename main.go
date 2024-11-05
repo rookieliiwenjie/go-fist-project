@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-fist-project/eneryDay"
 )
 
 // Used to check if numbers 1~n have been selected. true means selected, false otherwise
@@ -49,11 +50,15 @@ func getSmallestString(s string) string {
 
 }
 func main() {
+	c := 3
+	jumgo := new(eneryDay.Jumgo)
+	flag := jumgo.GetSmallestString(c)
+	fmt.Print(flag)
 	// fmt.Scan(&n)
 	// st = make([]bool, n+1)
 	// p = make([]int, n+1)
 	// dfs(1) // Start traversing from the first position
-	s := "43520"
-	var reslu = getSmallestString(s)
-	fmt.Println(reslu)
+	// s := "43520"
+	// var reslu = getSmallestString(s)
+	// fmt.Println(reslu)
 }
