@@ -20,3 +20,12 @@ func (losing LosingPlayer) LosingPlayer(x int, y int) string {
 	return userName[winner]
 
 }
+func losingPlayer(x int, y int) string {
+	ops := min(x, y/4)
+	if ops%2 == 1 {
+		return "Alice"
+	} else {
+		return "Bob"
+	}
+
+}
